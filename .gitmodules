@@ -1,6 +1,6 @@
 [submodule "tools/cocos2d-console"]
         path = tools/cocos2d-console
-        url = git://github.com/cocos2d/cocos2d-console.git
+        url = git://github.com/trungnt13/cocos2d-console
 [submodule "plugin"]
         path = plugin
         url = https://github.com/cocos2d-x/plugin-x.git
@@ -11,6 +11,6 @@
         path = tests/cpp-tests/Resources/ccs-res
         url = git://github.com/dumganhar/ccs-res.git
 [submodule "external"]
-	path = external
-	url = git://github.com/cocos2d/cocos2d-x-3rd-party-libs-bin.git
-	branch = v3
+		path = external
+		url = git://github.com/trungnt13/cocos2d-x-3rd-party-libs-bin
+		branch = v3
