@@ -395,7 +395,13 @@ void Label::setFontAtlas(FontAtlas* atlas,bool distanceFieldEnabled /* = false *
         _commonLineHeight = _fontAtlas->getCommonLineHeight();
         _contentDirty = true;
     }
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WP8
     _useDistanceField = distanceFieldEnabled;
+#else
+    // some older Windows Phones cannot run the ccShader_Label_df.frag program
+    // so we must disable distance field
+    _useDistanceField = false;
+#endif
     _useA8Shader = useA8Shader;
 
     if (_currentLabelType != LabelType::TTF)
@@ -1248,13 +1254,11 @@ bool Label::isOpacityModifyRGB() const
 
 void Label::setOpacityModifyRGB(bool isOpacityModifyRGB)
 {
-    _isOpacityModifyRGB = isOpacityModifyRGB;
-
-    for(const auto& child: _children) {
-        child->setOpacityModifyRGB(_isOpacityModifyRGB);
+    if (isOpacityModifyRGB != _isOpacityModifyRGB)
+    {
+        _isOpacityModifyRGB = isOpacityModifyRGB;
+        updateColor();
     }
-
-    _reusedLetter->setOpacityModifyRGB(true);
 }
 
 void Label::updateDisplayedColor(const Color3B& parentColor)
